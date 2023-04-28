@@ -17,12 +17,14 @@ public class MachineData {
                 .name("counter")
                 .max(150)
                 .min(50)
+                .current(100)
                 .build());
         machineSet.add(Machine.builder()
                 .id(1)
                 .name("temp")
                 .max(150)
                 .min(50)
+                .current(100)
                 .build());
     }
 

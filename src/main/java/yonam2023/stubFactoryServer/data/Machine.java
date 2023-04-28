@@ -2,12 +2,15 @@ package yonam2023.stubFactoryServer.data;
 
 import lombok.Builder;
 
+import java.util.Random;
+
 public class Machine {
     int id;
     String name;
     int max;
     int min;
     int current;
+    int initCurrent;
     boolean state = false;
 
     @Builder
@@ -17,6 +20,7 @@ public class Machine {
         this.max = max;
         this.min = min;
         this.current = current;
+        this.initCurrent = current;
     }
 
     public void setId(int id) {
@@ -46,10 +50,23 @@ public class Machine {
         this.state = state;
     }
     public int getCurrent(){
+        Random random = new Random();
+        current = current+random.nextInt(10)-5;
         return current;
     }
 
     public void setCurrent(int current){
         this.current = current;
     }
+
+    public void setCurrentInit(){
+        this.current = this.initCurrent;
+    }
+
+    public MachineState isOk(){
+        if(current>max) return MachineState.OVERLOAD;
+        else if(current<min) return MachineState.FAILURE;
+        else return MachineState.NORMAL;
+    }
+
 }

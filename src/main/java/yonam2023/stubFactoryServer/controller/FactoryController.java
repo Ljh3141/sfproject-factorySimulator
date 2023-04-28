@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineState;
 import yonam2023.stubFactoryServer.service.MachineService;
+import yonam2023.stubFactoryServer.service.StubRunning;
 
 @Controller
 public class FactoryController {
@@ -18,11 +19,25 @@ public class FactoryController {
     @Autowired
     MachineService ms;
 
+    @Autowired
+    StubRunning st;
+
+    @GetMapping("/turnOn")
+    public @ResponseBody String turnOnFactory(){
+        st.start();
+        return "hello sir";
+    }
+    @GetMapping("/turnOff")
+    public @ResponseBody String turnOffFactory(){
+        st.off();
+        return "good day";
+    }
+
     @GetMapping("/isMcExist/{McId}")
     public @ResponseBody String isMachineExist(@PathVariable("McId")int id){
         //check MachineData and MachineExist
         if(ms.findMachine(id)==null) return "false";
-        return "we got this";
+        return "true";
     }
 
     @GetMapping("/checkMcState/{McId}")

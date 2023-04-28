@@ -8,12 +8,9 @@ import yonam2023.stubFactoryServer.service.StubRunning;
 
 @SpringBootApplication
 public class StubFactoryServerApplication {
-	@Autowired
-	static StubRunning st;
 	public static void main(String[] args) {
 
 		SpringApplication.run(StubFactoryServerApplication.class, args);
-		st.run();
 	}
 
 

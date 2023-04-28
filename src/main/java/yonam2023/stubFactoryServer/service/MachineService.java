@@ -19,6 +19,7 @@ public class MachineService {
         Machine machine = md.findMachine(id);
         if(machine==null) return MachineState.NOTFOUND;
         else if(!machine.getState()) {
+            machine.setCurrentInit();
             machine.setState(true);
             return MachineState.TURNON;
         }else{

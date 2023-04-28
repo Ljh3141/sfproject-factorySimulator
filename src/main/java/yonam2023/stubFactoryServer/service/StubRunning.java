@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineData;
+import yonam2023.stubFactoryServer.data.MachineState;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -17,28 +18,36 @@ import java.util.Iterator;
 public class StubRunning extends Thread{
 
     private final String USER_AGENT = "Mozilla/5.0";
+    private boolean state = false;
 
     @Autowired
     MachineData md;
 
     @Override
     public void run(){
-
-        while(true){
+        state = true;
+        while(state){
             Iterator<Machine> iterator = md.getIterator();
+            System.out.println("Factory is going on...");
             while (iterator.hasNext()){
                 Machine machine = iterator.next();
                 if(machine.getState()){
                     //기계가 작동중이면 메시지 전송
                     System.out.println(machine.getId()+":"+machine.getCurrent());
+                    MachineState mcs = machine.isOk();
+                    if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
+                        System.out.println("Warnning!! Machine "+machine.getId()+" is Emergency STOP!!");
+                        machine.setState(false);
+                    }
                 }
             }
             try {
                 Thread.sleep(1000);
-            }catch (Exception e){
+            }catch (Exception e) {
                 System.out.println(e);
             }
         }
+        System.out.println("Factory is Shutting down...");
     }
     private void sendPost(String targetUrl, JSONObject jsonObject) throws Exception {
 
@@ -70,5 +79,9 @@ public class StubRunning extends Thread{
         System.out.println("HTTP 응답 코드 : " + responseCode);
         System.out.println("HTTP body : " + response.toString());
 
+    }
+
+    public void off(){
+        state = false;
     }
 }
