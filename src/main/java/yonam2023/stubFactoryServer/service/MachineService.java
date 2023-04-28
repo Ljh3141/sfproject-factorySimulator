@@ -11,6 +11,9 @@ public class MachineService {
     @Autowired
     MachineData md;
 
+    @Autowired
+    HttpService hs;
+
     public Machine findMachine(int id){
         return md.findMachine(id);
     }
@@ -34,6 +37,17 @@ public class MachineService {
             return MachineState.TURNOFF;
         }else{
             return MachineState.STOP;
+        }
+    }
+
+    public void fatalMachine(int id){
+        System.out.println("Warnning!! Machine "+id+" is Emergency STOP!!");
+        Machine machine = md.findMachine(id);
+        machine.setState(false);
+        try{
+            hs.sendGet("http://localhost:8080/fatalOccur/"+id);
+        }catch (Exception e){
+            System.out.println(e);
         }
     }
 }

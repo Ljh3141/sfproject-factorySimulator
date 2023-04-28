@@ -13,6 +13,7 @@ public class Machine {
     int initCurrent;
     boolean state = false;
 
+
     @Builder
     public Machine(int id, String name, int max, int min, int current){
         this.id = id;
@@ -51,7 +52,7 @@ public class Machine {
     }
     public int getCurrent(){
         Random random = new Random();
-        current = current+random.nextInt(10)-5;
+        current = current+random.nextInt(10)-10;//값을 나중에 6으로 조정할것.
         return current;
     }
 

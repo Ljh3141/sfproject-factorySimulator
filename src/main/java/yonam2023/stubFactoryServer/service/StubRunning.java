@@ -23,6 +23,9 @@ public class StubRunning extends Thread{
     @Autowired
     MachineData md;
 
+    @Autowired
+    MachineService ms;
+
     @Override
     public void run(){
         state = true;
@@ -36,8 +39,7 @@ public class StubRunning extends Thread{
                     System.out.println(machine.getId()+":"+machine.getCurrent());
                     MachineState mcs = machine.isOk();
                     if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
-                        System.out.println("Warnning!! Machine "+machine.getId()+" is Emergency STOP!!");
-                        machine.setState(false);
+                        ms.fatalMachine(machine.getId());
                     }
                 }
             }

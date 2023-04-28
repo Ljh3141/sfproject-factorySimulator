@@ -48,7 +48,6 @@ public class FactoryController {
         if(m==null){
             return "machine not found";
         }
-
         return String.valueOf(m.getState());
     }
 
@@ -73,7 +72,7 @@ public class FactoryController {
         }else if(mstate == MachineState.STOP){
             return "machine already stop : "+id;
         }else {
-            return "machine is now turnning off : "+id;
+            return "machine is now turning off : "+id;
         }
     }
 }
