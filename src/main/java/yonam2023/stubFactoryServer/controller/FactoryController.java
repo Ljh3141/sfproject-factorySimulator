@@ -30,12 +30,12 @@ public class FactoryController {
     @GetMapping("/turnOn")
     public @ResponseBody String turnOnFactory(){
         st.start();
-        return "hello sir";
+        return "factory successfully Started";
     }
     @GetMapping("/turnOff")
     public @ResponseBody String turnOffFactory(){
         st.off();
-        return "good day";
+        return "factory successfully shut down";
     }
 
     @GetMapping("/isMcExist/{McId}")
