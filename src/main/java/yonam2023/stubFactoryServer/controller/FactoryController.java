@@ -22,6 +22,11 @@ public class FactoryController {
     @Autowired
     StubRunning st;
 
+    @GetMapping("/cntCheck")
+    public @ResponseBody String connectCheck(){
+        return "true";
+    }
+
     @GetMapping("/turnOn")
     public @ResponseBody String turnOnFactory(){
         st.start();
