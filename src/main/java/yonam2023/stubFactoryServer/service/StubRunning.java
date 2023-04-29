@@ -1,17 +1,14 @@
 package yonam2023.stubFactoryServer.service;
 
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineData;
 import yonam2023.stubFactoryServer.data.MachineState;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Iterator;
 
 @Component
@@ -19,6 +16,8 @@ public class StubRunning extends Thread{
 
     private final String USER_AGENT = "Mozilla/5.0";
     private boolean state = false;
+    private boolean paused = false;
+    private Logger logger = LoggerFactory.getLogger(StubRunning.class);
 
     @Autowired
     MachineData md;
@@ -30,8 +29,16 @@ public class StubRunning extends Thread{
     public void run(){
         state = true;
         while(state){
+            while(paused){
+                try {
+                    Thread.sleep(1000);
+                    logger.info("Factory:Factory is paused");
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             Iterator<Machine> iterator = md.getIterator();
-            System.out.println("Factory is going on...");
+            logger.info("Factory:Factory is going on...");
             while (iterator.hasNext()){
                 Machine machine = iterator.next();
                 if(machine.getState()){
@@ -49,11 +56,26 @@ public class StubRunning extends Thread{
                 System.out.println(e);
             }
         }
-        System.out.println("Factory is Shutting down...");
+        logger.info("Factory:Factory is Shutting down...");
     }
 
 
     public void off(){
         state = false;
+    }
+
+    public boolean getFactoryState(){
+        return state;
+    }
+
+    public void pauseFactory(){
+        this.paused=true;
+    }
+    public void resumeFactory(){
+        this.paused=false;
+    }
+
+    public boolean getPause(){
+        return paused;
     }
 }
