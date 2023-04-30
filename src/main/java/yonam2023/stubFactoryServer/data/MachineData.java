@@ -13,14 +13,14 @@ public class MachineData {
 
     public MachineData(){
         machineSet.add(Machine.builder()
-                .id(0)
+                .mid(0)
                 .name("counter")
                 .max(150)
                 .min(50)
                 .current(100)
                 .build());
         machineSet.add(Machine.builder()
-                .id(1)
+                .mid(1)
                 .name("temp")
                 .max(150)
                 .min(50)
@@ -32,7 +32,7 @@ public class MachineData {
         Iterator<Machine> iterator = machineSet.iterator();
         while(iterator.hasNext()){
             Machine m = iterator.next();
-            if(m.getId()==id){
+            if(m.getMid()==id){
                 return m;
             }
         }

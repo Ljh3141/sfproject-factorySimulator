@@ -1,5 +1,9 @@
 package yonam2023.stubFactoryServer.service;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import yonam2023.stubFactoryServer.data.Machine;
@@ -13,6 +17,10 @@ public class MachineService {
 
     @Autowired
     HttpService hs;
+
+    private final String OperationURI = "http://localhost:8080/machine/";
+
+    private Logger logger = LoggerFactory.getLogger(MachineService.class);
 
     public Machine findMachine(int id){
         return md.findMachine(id);
@@ -41,13 +49,23 @@ public class MachineService {
     }
 
     public void fatalMachine(int id){
-        System.out.println("Warnning!! Machine "+id+" is Emergency STOP!!");
+        logger.error("Warnning!! Machine "+id+" is Emergency STOP!!");
         Machine machine = md.findMachine(id);
         machine.setState(false);
         try{
-            hs.sendGet("http://localhost:8080/fatalOccur/"+id);
+            hs.sendGet(OperationURI+"fatalOccur/"+id);
         }catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    public void sendData(JSONArray jsonArray){
+        logger.info("MachineService:send data to OperationServer");
+        logger.info("MachineService:Data count:"+jsonArray.size());
+        try{
+            hs.sendPost(OperationURI+"insertData/",jsonArray.toJSONString());
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }

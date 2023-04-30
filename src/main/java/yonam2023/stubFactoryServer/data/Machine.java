@@ -5,7 +5,7 @@ import lombok.Builder;
 import java.util.Random;
 
 public class Machine {
-    int id;
+    int mid;
     String name;
     int max;
     int min;
@@ -15,8 +15,8 @@ public class Machine {
 
 
     @Builder
-    public Machine(int id, String name, int max, int min, int current){
-        this.id = id;
+    public Machine(int mid, String name, int max, int min, int current){
+        this.mid = mid;
         this.name = name;
         this.max = max;
         this.min = min;
@@ -24,11 +24,11 @@ public class Machine {
         this.initCurrent = current;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setMid(int mid) {
+        this.mid = mid;
     }
-    public int getId() {
-        return id;
+    public int getMid() {
+        return mid;
     }
 
     public void setName(String name) {
@@ -52,7 +52,7 @@ public class Machine {
     }
     public int getCurrent(){
         Random random = new Random();
-        current = current+random.nextInt(10)-10;//값을 나중에 6으로 조정할것.
+        current = current+random.nextInt(10)-5;//값을 나중에 6으로 조정할것.
         return current;
     }
 
