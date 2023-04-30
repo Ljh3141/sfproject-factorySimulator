@@ -1,5 +1,7 @@
 package yonam2023.stubFactoryServer.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ public class FactoryController {
 
     @Autowired
     StubRunning st;
+
+    private Logger logger = LoggerFactory.getLogger(FactoryController.class);
 
     @GetMapping("/cntCheck")
     public @ResponseBody String connectCheck(){
@@ -43,6 +47,14 @@ public class FactoryController {
         }
         st.pauseFactory();
         return "factory successfully paused";
+    }
+
+    @GetMapping("/chkOperation")
+    public  @ResponseBody String checkOperationState(){
+        if(st.getFactoryState()&&!st.getPause()){
+            return "true";
+        }
+        return "false";
     }
 
     @GetMapping("/shutdown")

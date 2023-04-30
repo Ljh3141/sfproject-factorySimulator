@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class FactoryActiveFilter implements Filter {
-    private static final String[] whitelist = {"/pause/","/shutdown/","/isMcExist/*","/checkMcState/*","/runMachine/*","/stopMachine/*"};
+    private static final String[] whitelist = {"/pause/","/shutdown/","/checkMcState/*","/runMachine/*","/stopMachine/*"};
 
     private StubRunning st;
     private Logger logger = LoggerFactory.getLogger(FactoryActiveFilter.class);
