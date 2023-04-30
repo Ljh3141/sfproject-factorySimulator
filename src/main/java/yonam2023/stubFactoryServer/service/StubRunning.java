@@ -37,6 +37,7 @@ public class StubRunning extends Thread{
                     e.printStackTrace();
                 }
             }
+            int dataCount=0;
             Iterator<Machine> iterator = md.getIterator();
             logger.info("Factory:Factory is going on...");
             while (iterator.hasNext()){
