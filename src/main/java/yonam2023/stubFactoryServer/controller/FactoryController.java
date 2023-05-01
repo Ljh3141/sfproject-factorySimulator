@@ -32,13 +32,13 @@ public class FactoryController {
     public @ResponseBody String turnOnFactory(){
         if(st.getFactoryState()&&st.getPause()){
             st.resumeFactory();
-            return "factory resume and work again";
+            return "true";
         }
         else if(st.getFactoryState()){
             return "factory is already activated";
         }
         st.start();
-        return "factory successfully Started";
+        return "true";
     }
     @GetMapping("/pause")
     public @ResponseBody String pauseFactory(){
@@ -91,9 +91,9 @@ public class FactoryController {
         if(mstate == MachineState.NOTFOUND) {
             return "machine not found : "+ id;
         }else if(mstate == MachineState.RUN){
-            return "machine already run : "+id;
+            return "machine already running";
         }else {
-            return "machine is now running on : "+id;
+            return "true";
         }
     }
     @GetMapping("/stopMachine/{McId}")
@@ -105,7 +105,7 @@ public class FactoryController {
         }else if(mstate == MachineState.STOP){
             return "machine already stop : "+id;
         }else {
-            return "machine is now turning off : "+id;
+            return "true";
         }
     }
     @GetMapping("/serverNotActive")

@@ -33,12 +33,17 @@ public class StubRunning extends Thread{
     public void run(){
         state = true;
         while(state){
-            while(paused){
+            while(paused&&state){
                 try {
                     Thread.sleep(1000);
                     logger.info("Factory:Factory is paused");
                 }catch (Exception e) {
                     e.printStackTrace();
+                }
+                if(!state) {
+                    //공장이 정지상태이면 즉시 중단
+                    logger.info("Factory:Factory Shutdown while pause");
+                    break;
                 }
             }
             Iterator<Machine> iterator = md.getIterator();
