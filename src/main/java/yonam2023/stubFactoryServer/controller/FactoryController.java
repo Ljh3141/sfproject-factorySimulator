@@ -46,7 +46,7 @@ public class FactoryController {
             return "factory is already paused";
         }
         st.pauseFactory();
-        return "factory successfully paused";
+        return "true";
     }
 
     @GetMapping("/chkOperation")

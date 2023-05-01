@@ -40,11 +40,11 @@ public class StubRunning extends Thread{
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(!state) {
-                    //공장이 정지상태이면 즉시 중단
-                    logger.info("Factory:Factory Shutdown while pause");
-                    break;
-                }
+            }
+            if(!state) {
+                //공장이 정지상태이면 즉시 중단
+                logger.info("Factory:Factory Shutdown while pause");
+                break;
             }
             Iterator<Machine> iterator = md.getIterator();
             JSONArray jsonArray = new JSONArray();
