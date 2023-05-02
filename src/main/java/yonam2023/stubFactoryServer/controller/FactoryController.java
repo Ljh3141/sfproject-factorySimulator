@@ -1,5 +1,6 @@
 package yonam2023.stubFactoryServer.controller;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineState;
 import yonam2023.stubFactoryServer.service.MachineService;
 import yonam2023.stubFactoryServer.service.StubRunning;
+
+import java.util.ArrayList;
 
 @Controller
 public class FactoryController {
@@ -112,5 +115,13 @@ public class FactoryController {
     @ResponseBody
     public String serverNotActiveGet(){
         return "Server Not Active";
+    }
+
+    @GetMapping("/getMachineIdList")
+    @ResponseBody
+    public String getMachineIdList(){
+        ArrayList<String> midList = ms.getMachineIdList();
+
+        return midList.toString();
     }
 }

@@ -10,6 +10,9 @@ import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineData;
 import yonam2023.stubFactoryServer.data.MachineState;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MachineService {
     @Autowired
@@ -67,5 +70,9 @@ public class MachineService {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getMachineIdList(){
+        return md.getMidList();
     }
 }

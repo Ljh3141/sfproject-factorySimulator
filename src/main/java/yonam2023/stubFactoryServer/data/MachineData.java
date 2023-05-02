@@ -3,9 +3,7 @@ package yonam2023.stubFactoryServer.data;
 import org.springframework.stereotype.Component;
 import yonam2023.stubFactoryServer.service.MachineService;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class MachineData {
@@ -58,6 +56,17 @@ public class MachineData {
             }
         }
         return null;
+    }
+
+    public ArrayList<String> getMidList(){
+        ArrayList<String> midList = new ArrayList<>();
+        Iterator<Machine> iterator = machineSet.iterator();
+
+        while(iterator.hasNext()) {
+            Machine m = iterator.next();
+            midList.add(Integer.toString(m.getMid()));
+        }
+        return midList;
     }
 
     public Iterator<Machine> getIterator(){
