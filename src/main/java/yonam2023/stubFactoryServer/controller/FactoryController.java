@@ -124,4 +124,14 @@ public class FactoryController {
 
         return midList.toString();
     }
+
+    @GetMapping("/getMachineData/{mid}")
+    @ResponseBody
+    public String getMachineData(@PathVariable("mid") int mid){
+        //기계 데이터를 반환하는 코드.
+        //최대 재고량, 현재 재고량, 사용률 등을 반환함.
+        //RESTful 로 통신. JSON 파싱 형태로 전달 할것.
+        return "";
+    }
+
 }
