@@ -7,38 +7,40 @@ import java.util.*;
 
 @Component
 public class MachineData {
-    Set<Machine> machineSet = new HashSet<Machine>();
+    //Set<Machine> machineSet = new HashSet<Machine>();
+
+    List<Machine> machineList = new ArrayList<>();
 
     public MachineData(){
-        machineSet.add(Machine.builder()
+        machineList.add(Machine.builder()
                 .mid(1010)
                 .name("counter label")
                 .max(150)
                 .min(50)
                 .current(100)
                 .build());
-        machineSet.add(Machine.builder()
+        machineList.add(Machine.builder()
                 .mid(1011)
                 .name("temp")
                 .max(150)
                 .min(50)
                 .current(100)
                 .build());
-        machineSet.add(Machine.builder()
+        machineList.add(Machine.builder()
                 .mid(1012)
                 .name("counter can")
                 .max(150)
                 .min(50)
                 .current(100)
                 .build());
-        machineSet.add(Machine.builder()
+        machineList.add(Machine.builder()
                 .mid(1013)
                 .name("temp")
                 .max(150)
                 .min(50)
                 .current(100)
                 .build());
-        machineSet.add(Machine.builder()
+        machineList.add(Machine.builder()
                 .mid(1014)
                 .name("counter liq")
                 .max(150)
@@ -48,7 +50,7 @@ public class MachineData {
     }
 
     public Machine findMachine(int id){
-        Iterator<Machine> iterator = machineSet.iterator();
+        MachineIterator iterator = new MachineIterator(machineList);
         while(iterator.hasNext()){
             Machine m = iterator.next();
             if(m.getMid()==id){
@@ -60,7 +62,7 @@ public class MachineData {
 
     public ArrayList<String> getMidList(){
         ArrayList<String> midList = new ArrayList<>();
-        Iterator<Machine> iterator = machineSet.iterator();
+        MachineIterator iterator = new MachineIterator(machineList);
 
         while(iterator.hasNext()) {
             Machine m = iterator.next();
@@ -69,8 +71,8 @@ public class MachineData {
         return midList;
     }
 
-    public Iterator<Machine> getIterator(){
-        return machineSet.iterator();
+    public MachineIterator getIterator(){
+        return new MachineIterator(machineList);
     }
 
 }

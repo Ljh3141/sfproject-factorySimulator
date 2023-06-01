@@ -52,7 +52,7 @@ public class Machine {
     }
     public int getCurrent(){
         Random random = new Random();
-        current = current+random.nextInt(10)-5;//값을 나중에 6으로 조정할것.
+        current = current+random.nextInt(10)-8;//값을 나중에 6으로 조정할것.
         return current;
     }
 

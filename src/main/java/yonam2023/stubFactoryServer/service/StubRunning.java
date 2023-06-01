@@ -6,10 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import yonam2023.stubFactoryServer.data.Machine;
-import yonam2023.stubFactoryServer.data.MachineData;
-import yonam2023.stubFactoryServer.data.MachineSensorData;
-import yonam2023.stubFactoryServer.data.MachineState;
+import yonam2023.stubFactoryServer.data.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,7 +43,7 @@ public class StubRunning extends Thread{
                 logger.info("Factory:Factory Shutdown while pause");
                 break;
             }
-            Iterator<Machine> iterator = md.getIterator();
+            MachineIterator iterator = md.getIterator();
             JSONArray jsonArray = new JSONArray();
             logger.info("Factory:Factory is going on...");
             while (iterator.hasNext()){
