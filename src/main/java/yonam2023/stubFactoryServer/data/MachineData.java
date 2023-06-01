@@ -18,6 +18,10 @@ public class MachineData {
                 .max(150)
                 .min(50)
                 .current(100)
+                .stock(0)
+                .maxStock(1000)
+                .useResource("설탕")
+                .useRate(10)
                 .build());
         machineList.add(Machine.builder()
                 .mid(1011)
@@ -25,6 +29,10 @@ public class MachineData {
                 .max(150)
                 .min(50)
                 .current(100)
+                .stock(0)
+                .maxStock(1000)
+                .useResource("설탕")
+                .useRate(15)
                 .build());
         machineList.add(Machine.builder()
                 .mid(1012)
@@ -32,6 +40,10 @@ public class MachineData {
                 .max(150)
                 .min(50)
                 .current(100)
+                .stock(0)
+                .maxStock(1000)
+                .useResource("설탕")
+                .useRate(20)
                 .build());
         machineList.add(Machine.builder()
                 .mid(1013)
@@ -39,6 +51,10 @@ public class MachineData {
                 .max(150)
                 .min(50)
                 .current(100)
+                .stock(0)
+                .maxStock(1000)
+                .useResource("설탕")
+                .useRate(30)
                 .build());
         machineList.add(Machine.builder()
                 .mid(1014)
@@ -46,6 +62,10 @@ public class MachineData {
                 .max(150)
                 .min(50)
                 .current(100)
+                .stock(0)
+                .maxStock(1000)
+                .useResource("설탕")
+                .useRate(35)
                 .build());
     }
 

@@ -54,6 +54,7 @@ public class StubRunning extends Thread{
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("mid", msd.getMid());
                     jsonObject.put("value", msd.getValue());
+                    //소비 데이터 및 자원 여분량 표기.
                     jsonArray.add(jsonObject);
                     MachineState mcs = machine.isOk();
                     if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
