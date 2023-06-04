@@ -55,6 +55,53 @@ public class Machine {
         this.min = min;
     }
 
+    //ObjectMapper는 getter를 사용하므로 출력할 모든 데이터의 getter가 필요하다.
+    public String getName() {
+        return name;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public int getMin() {
+        return min;
+    }
+
+    public int getInitCurrent() {
+        return initCurrent;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public String getUseResource() {
+        return useResource;
+    }
+
+    public int getMaxStock() {
+        return maxStock;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public int addStock(int amount){
+        stock +=amount;
+        if(stock >maxStock){
+            int result = stock - maxStock;
+            stock = maxStock;
+            return result;
+        }
+        return -1;
+    }
+
+    public int getUseRate() {
+        return useRate;
+    }
+
     public boolean getState(){
         return state;
     }

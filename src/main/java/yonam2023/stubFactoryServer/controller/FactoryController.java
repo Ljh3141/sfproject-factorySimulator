@@ -1,13 +1,13 @@
 package yonam2023.stubFactoryServer.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import yonam2023.stubFactoryServer.Exception.MachineNotFoundException;
 import yonam2023.stubFactoryServer.data.Machine;
 import yonam2023.stubFactoryServer.data.MachineState;
 import yonam2023.stubFactoryServer.service.MachineService;
@@ -131,7 +131,33 @@ public class FactoryController {
         //기계 데이터를 반환하는 코드.
         //최대 재고량, 현재 재고량, 사용률 등을 반환함.
         //RESTful 로 통신. JSON 파싱 형태로 전달 할것.
-        return "";
+        Machine m = ms.findMachine(mid);
+        if(m==null){
+            return "false";
+        }
+        ObjectMapper om = new ObjectMapper();
+        String result;
+        try{result = om.writeValueAsString(m);}
+        catch(Exception e){
+            e.printStackTrace();
+            return "false";
+        }
+        return result;
+    }
+
+    @PostMapping("/addStock")
+    @ResponseBody
+    public String addStock(@RequestBody JSONObject jsonObject){
+        logger.info(jsonObject.toString());
+        int result;
+        //데이터 수령 확인됨.
+        try{
+            result = ms.addStockToMachine(jsonObject);
+        }catch (MachineNotFoundException me){
+            logger.info("There is no Machine  match with id "+jsonObject.get("mid"));
+            return "Machine Not Found";
+        }
+        return ""+result;
     }
 
 }
