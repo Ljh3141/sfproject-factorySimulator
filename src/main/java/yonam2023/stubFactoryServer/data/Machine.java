@@ -123,7 +123,13 @@ public class Machine {
         this.current = this.initCurrent;
     }
 
+    public int getUsed(){
+        stock-=useRate;
+        return useRate;
+    }
+
     public MachineState isOk(){
+        if(stock-useRate<0) return MachineState.EXHAUSTED;
         if(current>max) return MachineState.OVERLOAD;
         else if(current<min) return MachineState.FAILURE;
         else return MachineState.NORMAL;

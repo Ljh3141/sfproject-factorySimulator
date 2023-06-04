@@ -10,4 +10,5 @@ import lombok.Setter;
 public class MachineSensorData {
     int mid;
     int value;
+    int used;
 }
