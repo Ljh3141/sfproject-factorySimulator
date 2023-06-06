@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import yonam2023.stubFactoryServer.data.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 @Component
 public class StubRunning extends Thread{
 
@@ -65,6 +61,7 @@ public class StubRunning extends Thread{
                     jsonArray.add(jsonObject);
                     logger.info("Machine "+machine.getMid()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getUseResource()+" now value "+msd.getValue());
 
+                    mcs = machine.isOk();
                     if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
                         //기계가 작동했으나 기계의 상태가 정상 범주를 벗어남.
                         ms.fatalMachine(machine.getMid());
