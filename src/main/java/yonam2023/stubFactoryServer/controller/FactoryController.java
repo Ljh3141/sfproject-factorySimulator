@@ -69,44 +69,44 @@ public class FactoryController {
         return "factory successfully shut down";
     }
 
-    @GetMapping("/isMcExist/{McId}")
-    public @ResponseBody String isMachineExist(@PathVariable("McId")int id){
+    @GetMapping("/isMcExist/{mid}")
+    public @ResponseBody String isMachineExist(@PathVariable("mid")int mid){
         //check MachineData and MachineExist
-        if(ms.findMachine(id)==null) return "false";
+        if(ms.findMachine(mid)==null) return "false";
         return "true";
     }
 
-    @GetMapping("/checkMcState/{McId}")
-    public @ResponseBody String checkMachineState(@PathVariable("McId")int id){
+    @GetMapping("/checkMcState/{mid}")
+    public @ResponseBody String checkMachineState(@PathVariable("mid")int mid){
         //check and return Machine state
         //if not exist, send something different
-        Machine m = ms.findMachine(id);
+        Machine m = ms.findMachine(mid);
         if(m==null){
             return "machine not found";
         }
         return String.valueOf(m.getState());
     }
 
-    @GetMapping("/runMachine/{McId}")
+    @GetMapping("/runMachine/{mid}")
     @ResponseBody
-    public String runMachineGet(@PathVariable("McId")int id){
-        MachineState mstate = ms.runMachine(id);
+    public String runMachineGet(@PathVariable("mid")int mid){
+        MachineState mstate = ms.runMachine(mid);
         if(mstate == MachineState.NOTFOUND) {
-            return "machine not found : "+ id;
+            return "machine not found : "+ mid;
         }else if(mstate == MachineState.RUN){
             return "machine already running";
         }else {
             return "true";
         }
     }
-    @GetMapping("/stopMachine/{McId}")
+    @GetMapping("/stopMachine/{mid}")
     @ResponseBody
-    public String stopMachineGet(@PathVariable("McId")int id){
-        MachineState mstate = ms.stopMachine(id);
+    public String stopMachineGet(@PathVariable("mid")int mid){
+        MachineState mstate = ms.stopMachine(mid);
         if(mstate == MachineState.NOTFOUND) {
-            return "machine not found : "+ id;
+            return "machine not found : "+ mid;
         }else if(mstate == MachineState.STOP){
-            return "machine already stop : "+id;
+            return "machine already stop : "+mid;
         }else {
             return "true";
         }
