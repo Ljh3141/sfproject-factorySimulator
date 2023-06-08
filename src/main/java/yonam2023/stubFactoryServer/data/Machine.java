@@ -72,6 +72,26 @@ public class Machine {
         return initCurrent;
     }
 
+    public int getCurrent() {
+        return current;
+    }
+
+    public void setUseResource(String useResource) {
+        this.useResource = useResource;
+    }
+
+    public void setMaxStock(int maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public void setUseRate(int useRate) {
+        this.useRate = useRate;
+    }
+
     public boolean isState() {
         return state;
     }
@@ -109,7 +129,7 @@ public class Machine {
     public void setState(boolean state){
         this.state = state;
     }
-    public int getCurrent(){
+    public int callCurrent(){
         Random random = new Random();
         current = current+random.nextInt(10)-8;//값을 나중에 6으로 조정할것.
         return current;
@@ -123,7 +143,7 @@ public class Machine {
         this.current = this.initCurrent;
     }
 
-    public int getUsed(){
+    public int used(){
         stock-=useRate;
         return useRate;
     }

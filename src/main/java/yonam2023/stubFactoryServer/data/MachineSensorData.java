@@ -11,4 +11,5 @@ public class MachineSensorData {
     int mid;
     int value;
     int used;
+    int stock;
 }

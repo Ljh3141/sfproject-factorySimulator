@@ -52,11 +52,17 @@ public class StubRunning extends Thread{
                         ms.fatalMachine(machine.getMid());
                         continue;
                     }
-                    MachineSensorData msd = MachineSensorData.builder().mid(machine.getMid()).value(machine.getCurrent()).used(machine.getUsed()).build();
+                    MachineSensorData msd = MachineSensorData.builder()
+                            .mid(machine.getMid())
+                            .value(machine.callCurrent())
+                            .used(machine.used())
+                            .stock(machine.getStock())
+                            .build();
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("mid", msd.getMid());
                     jsonObject.put("value", msd.getValue());
                     jsonObject.put("used", msd.getUsed());
+                    jsonObject.put("stock", msd.getStock());
                     //소비 데이터 및 자원 여분량 표기.
                     jsonArray.add(jsonObject);
                     logger.info("Machine "+machine.getMid()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getUseResource()+" now value "+msd.getValue());
