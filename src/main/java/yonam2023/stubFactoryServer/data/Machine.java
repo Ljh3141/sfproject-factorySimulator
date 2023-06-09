@@ -5,7 +5,7 @@ import lombok.Builder;
 import java.util.Random;
 
 public class Machine {
-    int mid;
+    int machineId;
     String name;
     int max;
     int min;
@@ -23,8 +23,8 @@ public class Machine {
 
 
     @Builder
-    public Machine(int mid, String name, int max, int min, int current, String useResource, int maxStock, int stock, int useRate){
-        this.mid = mid;
+    public Machine(int machineId, String name, int max, int min, int current, String useResource, int maxStock, int stock, int useRate){
+        this.machineId = machineId;
         this.name = name;
         this.max = max;
         this.min = min;
@@ -36,11 +36,11 @@ public class Machine {
         this.useRate = useRate;
     }
 
-    public void setMid(int mid) {
-        this.mid = mid;
+    public void setMachineId(int machineId) {
+        this.machineId = machineId;
     }
-    public int getMid() {
-        return mid;
+    public int getMachineId() {
+        return machineId;
     }
 
     public void setName(String name) {

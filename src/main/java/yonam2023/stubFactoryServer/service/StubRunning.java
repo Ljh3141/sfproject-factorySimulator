@@ -49,28 +49,28 @@ public class StubRunning extends Thread{
                     MachineState mcs = machine.isOk();
                     if(mcs == MachineState.EXHAUSTED){
                         //재료 고갈. 기계가 작동할 수 없음.
-                        ms.fatalMachine(machine.getMid());
+                        ms.fatalMachine(machine.getMachineId());
                         continue;
                     }
                     MachineSensorData msd = MachineSensorData.builder()
-                            .mid(machine.getMid())
+                            .machineId(machine.getMachineId())
                             .value(machine.callCurrent())
                             .used(machine.used())
                             .stock(machine.getStock())
                             .build();
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("mid", msd.getMid());
+                    jsonObject.put("machineId", msd.getMachineId());
                     jsonObject.put("value", msd.getValue());
                     jsonObject.put("used", msd.getUsed());
                     jsonObject.put("stock", msd.getStock());
                     //소비 데이터 및 자원 여분량 표기.
                     jsonArray.add(jsonObject);
-                    logger.info("Machine "+machine.getMid()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getUseResource()+" now value "+msd.getValue());
+                    logger.info("Machine "+machine.getMachineId()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getUseResource()+" now value "+msd.getValue());
 
                     mcs = machine.isOk();
                     if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
                         //기계가 작동했으나 기계의 상태가 정상 범주를 벗어남.
-                        ms.fatalMachine(machine.getMid());
+                        ms.fatalMachine(machine.getMachineId());
                     }
                 }
             }

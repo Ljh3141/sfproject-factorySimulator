@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class MachineSensorData {
-    int mid;
+    int machineId;
     int value;
     int used;
     int stock;

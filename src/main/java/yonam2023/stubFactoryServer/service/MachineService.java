@@ -57,7 +57,7 @@ public class MachineService {
         Machine machine = md.findMachine(id);
         machine.setState(false);
         try{
-            hs.sendGet(OperationURI+"fatalOccur/"+id);
+            hs.sendGet(OperationURI+"halt/"+id);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -67,7 +67,7 @@ public class MachineService {
         logger.info("MachineService:send data to OperationServer");
         logger.info("MachineService:Data count:"+jsonArray.size());
         try{
-            hs.sendPost(OperationURI+"insertData/",jsonArray.toJSONString());
+            hs.sendPost(OperationURI+"sensor-data-insert/",jsonArray.toJSONString());
         }catch (Exception e){
             e.printStackTrace();
         }

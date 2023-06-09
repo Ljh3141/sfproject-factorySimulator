@@ -13,7 +13,7 @@ public class MachineData {
 
     public MachineData(){
         machineList.add(Machine.builder()
-                .mid(1010)
+                .machineId(1010)
                 .name("counter label")
                 .max(150)
                 .min(50)
@@ -24,7 +24,7 @@ public class MachineData {
                 .useRate(10)
                 .build());
         machineList.add(Machine.builder()
-                .mid(1011)
+                .machineId(1011)
                 .name("temp")
                 .max(150)
                 .min(50)
@@ -35,7 +35,7 @@ public class MachineData {
                 .useRate(15)
                 .build());
         machineList.add(Machine.builder()
-                .mid(1012)
+                .machineId(1012)
                 .name("counter can")
                 .max(150)
                 .min(50)
@@ -46,7 +46,7 @@ public class MachineData {
                 .useRate(20)
                 .build());
         machineList.add(Machine.builder()
-                .mid(1013)
+                .machineId(1013)
                 .name("temp")
                 .max(150)
                 .min(50)
@@ -57,7 +57,7 @@ public class MachineData {
                 .useRate(30)
                 .build());
         machineList.add(Machine.builder()
-                .mid(1014)
+                .machineId(1014)
                 .name("counter liq")
                 .max(150)
                 .min(50)
@@ -73,7 +73,7 @@ public class MachineData {
         MachineIterator iterator = new MachineIterator(machineList);
         while(iterator.hasNext()){
             Machine m = iterator.next();
-            if(m.getMid()==id){
+            if(m.getMachineId()==id){
                 return m;
             }
         }
@@ -86,7 +86,7 @@ public class MachineData {
 
         while(iterator.hasNext()) {
             Machine m = iterator.next();
-            midList.add(Integer.toString(m.getMid()));
+            midList.add(Integer.toString(m.getMachineId()));
         }
         return midList;
     }
