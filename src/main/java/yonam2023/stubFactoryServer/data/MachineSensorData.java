@@ -12,4 +12,7 @@ public class MachineSensorData {
     int value;
     int used;
     int stock;
+    boolean output;
+
+    String productType;
 }

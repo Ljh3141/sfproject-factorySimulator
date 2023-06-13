@@ -52,12 +52,25 @@ public class MachineService {
         }
     }
 
-    public void fatalMachine(int id){
-        logger.error("Warnning!! Machine "+id+" is Emergency STOP!!");
+    public void fatalMachine(int id, MachineState state){
+        logger.error("Warnning!! Machine "+id+" is Emergency STOP!!"+state);
         Machine machine = md.findMachine(id);
         machine.setState(false);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("machine_id", id);
+        if(state == MachineState.EXHAUSTED) {
+            jsonObject.put("cause", "재료 부족");
+        } else if (state == MachineState.OVERLOAD) {
+            jsonObject.put("cause", "정상 범위 초과");
+        } else if (state == MachineState.FAILURE) {
+            jsonObject.put("cause", "정상 범위 미만");
+        } else {
+            jsonObject.put("cause", "알 수 없는 오류");
+        }
+
+
         try{
-            hs.sendGet(OperationURI+"halt/"+id);
+            hs.sendPost(OperationURI+"halt/"+id, jsonObject.toString());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -80,7 +93,7 @@ public class MachineService {
     public int addStockToMachine(JSONObject jsonObject) throws MachineNotFoundException{
         //mid의 기계가 존재하는지 확인
         //mid의 기계가 존재하면 재고 충전 시도.
-        //재고의 수량이 초과한다면 초과한 수량을 반환, 성공했다면 -1 반환
+        //재고의 수량이 초과한다면 초과한 수량을 반환, 성공했다면 0 반환
         int mid = (int) jsonObject.get("mid");
         int amount = (int) jsonObject.get("amount");
         logger.info("receive stock : "+amount+" to "+mid);

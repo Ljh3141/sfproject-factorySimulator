@@ -20,7 +20,7 @@ public class MachineData {
                 .current(100)
                 .stock(0)
                 .maxStock(1000)
-                .useResource("설탕")
+                .resourceType("설탕")
                 .useRate(10)
                 .build());
         machineList.add(Machine.builder()
@@ -31,8 +31,10 @@ public class MachineData {
                 .current(100)
                 .stock(0)
                 .maxStock(1000)
-                .useResource("설탕")
+                .resourceType("캔")
                 .useRate(15)
+                .output(true)
+                .productType("monster")
                 .build());
         machineList.add(Machine.builder()
                 .machineId(1012)
@@ -42,7 +44,7 @@ public class MachineData {
                 .current(100)
                 .stock(0)
                 .maxStock(1000)
-                .useResource("설탕")
+                .resourceType("설탕")
                 .useRate(20)
                 .build());
         machineList.add(Machine.builder()
@@ -53,7 +55,7 @@ public class MachineData {
                 .current(100)
                 .stock(0)
                 .maxStock(1000)
-                .useResource("설탕")
+                .resourceType("설탕")
                 .useRate(30)
                 .build());
         machineList.add(Machine.builder()
@@ -64,7 +66,7 @@ public class MachineData {
                 .current(100)
                 .stock(0)
                 .maxStock(1000)
-                .useResource("설탕")
+                .resourceType("설탕")
                 .useRate(35)
                 .build());
     }

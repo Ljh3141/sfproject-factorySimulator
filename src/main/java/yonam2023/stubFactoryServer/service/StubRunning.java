@@ -49,7 +49,7 @@ public class StubRunning extends Thread{
                     MachineState mcs = machine.isOk();
                     if(mcs == MachineState.EXHAUSTED){
                         //재료 고갈. 기계가 작동할 수 없음.
-                        ms.fatalMachine(machine.getMachineId());
+                        ms.fatalMachine(machine.getMachineId(), mcs);
                         continue;
                     }
                     MachineSensorData msd = MachineSensorData.builder()
@@ -57,20 +57,31 @@ public class StubRunning extends Thread{
                             .value(machine.callCurrent())
                             .used(machine.used())
                             .stock(machine.getStock())
+                            .output(machine.isOutput())
+                            .productType(machine.getProductType())
                             .build();
+
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("machineId", msd.getMachineId());
                     jsonObject.put("value", msd.getValue());
                     jsonObject.put("used", msd.getUsed());
                     jsonObject.put("stock", msd.getStock());
+                    jsonObject.put("hasOutput", msd.isOutput());
+
+                    if(msd.isOutput()){
+                        jsonObject.put("productType", msd.getProductType());
+                        jsonObject.put("output", msd.getUsed());
+                    }
+
                     //소비 데이터 및 자원 여분량 표기.
                     jsonArray.add(jsonObject);
-                    logger.info("Machine "+machine.getMachineId()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getUseResource()+" now value "+msd.getValue());
+                    logger.info("Machine "+machine.getMachineId()+" used "+msd.getUsed()+"/"+machine.getStock()+" "+machine.getResourceType()+" now value "+msd.getValue());
 
                     mcs = machine.isOk();
+
                     if(mcs== MachineState.OVERLOAD || mcs == MachineState.FAILURE){
                         //기계가 작동했으나 기계의 상태가 정상 범주를 벗어남.
-                        ms.fatalMachine(machine.getMachineId());
+                        ms.fatalMachine(machine.getMachineId(), mcs);
                     }
                 }
             }
@@ -81,7 +92,7 @@ public class StubRunning extends Thread{
             try {
                 Thread.sleep(1000);
             }catch (Exception e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
         logger.info("Factory:Factory is Shutting down...");

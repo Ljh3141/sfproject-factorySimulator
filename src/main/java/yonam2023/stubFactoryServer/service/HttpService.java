@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 @Service
 public class HttpService {
@@ -56,7 +57,7 @@ public class HttpService {
 
         // Send post request
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(string);
+        wr.write(string.getBytes(StandardCharsets.UTF_8));
         wr.flush();
         wr.close();
 

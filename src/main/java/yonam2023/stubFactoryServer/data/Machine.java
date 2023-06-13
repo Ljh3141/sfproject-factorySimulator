@@ -12,7 +12,7 @@ public class Machine {
     int current;
     int initCurrent;
     boolean state = false;
-    String useResource;
+    String resourceType;
     //소비 자원 유형
     int maxStock;
     //자원 최대량. 이 이상으로 저장할 수 없음. 자원 부족 표시 기준값
@@ -20,20 +20,26 @@ public class Machine {
     //재고량
     int useRate;
     //use rate의 동적인 변화는 고려할것.
+    //출고 기계인가?
+    boolean output;
+
+    String productType;
 
 
     @Builder
-    public Machine(int machineId, String name, int max, int min, int current, String useResource, int maxStock, int stock, int useRate){
+    public Machine(int machineId, String name, int max, int min, int current, String resourceType, int maxStock, int stock, int useRate, boolean output, String productType){
         this.machineId = machineId;
         this.name = name;
         this.max = max;
         this.min = min;
         this.current = current;
         this.initCurrent = current;
-        this.useResource = useResource;
+        this.resourceType = resourceType;
         this.maxStock = maxStock;
         this.stock = stock;
         this.useRate = useRate;
+        this.output = output;
+        this.productType = productType;
     }
 
     public void setMachineId(int machineId) {
@@ -76,8 +82,8 @@ public class Machine {
         return current;
     }
 
-    public void setUseResource(String useResource) {
-        this.useResource = useResource;
+    public void setResourceType(String resourceType) {
+        this.resourceType = resourceType;
     }
 
     public void setMaxStock(int maxStock) {
@@ -96,8 +102,8 @@ public class Machine {
         return state;
     }
 
-    public String getUseResource() {
-        return useResource;
+    public String getResourceType() {
+        return resourceType;
     }
 
     public int getMaxStock() {
@@ -115,7 +121,7 @@ public class Machine {
             stock = maxStock;
             return result;
         }
-        return -1;
+        return 0;
     }
 
     public int getUseRate() {
@@ -142,6 +148,10 @@ public class Machine {
     public void setCurrentInit(){
         this.current = this.initCurrent;
     }
+
+    public boolean isOutput() { return this.output; }
+
+    public String getProductType() { return this.productType; }
 
     public int used(){
         stock-=useRate;
